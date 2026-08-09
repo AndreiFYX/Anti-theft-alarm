@@ -24,7 +24,7 @@ public class BeginningAlarm : MonoBehaviour
             StopCoroutine(_fadeCoroutine);
         }
 
-        _fadeCoroutine = StartCoroutine(FadeValue(_alarmSourse.volume, _maxValue, _fadeDuration));
+        _fadeCoroutine = StartCoroutine(FadeValue(_maxValue,_maxValue / _fadeDuration));
     }
 
     private void OnTriggerExit(Collider other)
@@ -37,24 +37,18 @@ public class BeginningAlarm : MonoBehaviour
             StopCoroutine(_fadeCoroutine);
         }
 
-        _fadeCoroutine = StartCoroutine(FadeValue(_alarmSourse.volume, 0f, _fadeDuration / 2f));
+        _fadeCoroutine = StartCoroutine(FadeValue(0f, _maxValue / (_fadeDuration / 2f)));
     }
 
-    private IEnumerator FadeValue(float startValue, float endValue, float duration)
+    private IEnumerator FadeValue(float targetValue, float speed)
     {
-        float elapsedTime = 0f;
-
-        while (elapsedTime < duration)
+        while(_alarmSourse.volume != targetValue)
         {
-            elapsedTime += Time.deltaTime;
-            _alarmSourse.volume = Mathf.Lerp(startValue, endValue, elapsedTime / duration);
-
+            _alarmSourse.volume = Mathf.MoveTowards(_alarmSourse.volume, targetValue, speed * Time.deltaTime);
             yield return null;
         }
 
-        _alarmSourse.volume = endValue;
-
-        if (endValue == 0.01f)
+        if(targetValue == 0f)
         {
             _alarmSourse.Stop();
         }
