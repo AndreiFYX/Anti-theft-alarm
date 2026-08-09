@@ -26,6 +26,6 @@ public class Thief : MonoBehaviour
         float direction = Input.GetAxis(Vertical);
         float distance = direction * _moveSpeed * Time.deltaTime;
 
-        transform.Translate(direction * Vector3.forward);
+        transform.Translate(distance * Vector3.forward);
     }
 }
