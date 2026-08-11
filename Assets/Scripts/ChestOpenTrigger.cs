@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ChestOpenTrigger : MonoBehaviour
 {
-    [SerializeField] private OpenDoor _chest;
+    [SerializeField] private Door _chest;
 
     private bool _isOpened = false;
     private bool _hasOpener;

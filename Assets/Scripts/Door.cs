@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-    public class OpenDoor : MonoBehaviour
+    public class Door : MonoBehaviour
     {
         private readonly int OpenTrigger = Animator.StringToHash("Open");
 
